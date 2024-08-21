@@ -1,3 +1,4 @@
 *.nix
 venv-env.sh
 .venv
+src/__pycache__/
