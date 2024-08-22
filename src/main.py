@@ -36,6 +36,14 @@ def main():
         for obj in updatable:
             obj.update(dt)
         for obj in asteroids:
+            # O(n^2) operation really bad
+            bounce_group = []
+            for astr in asteroids:
+                if obj.collision(astr) and obj != astr:
+                    if (obj, astr) not in bounce_group:
+                        bounce_group.append(obj)
+                        bounce_group.append(astr)
+                        obj.bounce(astr)
             if obj.collision(player):
                 print("Game over!")
                 sys.exit()
