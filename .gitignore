@@ -1,4 +1,5 @@
 *.nix
+!python-env.nix
 venv-env.sh
 .venv
 src/__pycache__/
