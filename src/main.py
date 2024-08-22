@@ -13,6 +13,7 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    bullet = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
@@ -22,8 +23,7 @@ def main():
 
     asteroid_field = AsteroidField()
 
-    print(updatable)
-    print(drawable)
+    Shot.containers = (bullet, updatable, drawable) 
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     current_time = pygame.time.Clock()
@@ -39,6 +39,11 @@ def main():
             if obj.collision(player):
                 print("Game over!")
                 sys.exit()
+            for bul in bullet:
+                if bul.collision(obj):
+                    bul.kill()
+                    obj.split()
+
         for obj in drawable:
             obj.draw(screen)
         pygame.display.flip()
